@@ -8,6 +8,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { throws } from 'assert';
 import { Movie } from './entities/movie.entity';
 import { MoviesService } from './movies.service';
 
@@ -37,14 +38,11 @@ export class MoviesController {
 
   @Delete('/:id')
   removeMovie(@Param('id') movieId: string) {
-    return `this will delete a movie with the id : ${movieId}`;
+    return this.movieService.deleteMovie(movieId);
   }
 
   @Patch('/:id')
   updateMovie(@Param('id') movieId: string, @Body() updateData) {
-    return {
-      updateMovie: movieId,
-      ...updateData,
-    };
+    return this.movieService.updateMovie(movieId, updateData);
   }
 }
