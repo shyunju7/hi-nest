@@ -1,4 +1,4 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 // 데이터 전송 객체 - 코드를 더 간결하게 해주며, 쿼리에 대한 유효성처리가 가능하다.
 export class CreateMovieDTO {
@@ -8,6 +8,7 @@ export class CreateMovieDTO {
   @IsNumber()
   readonly year: number;
 
+  @IsOptional()
   @IsString({ each: true }) // each : 모든 요소를 하나씩 검사함
   readonly genres: string[];
 }
