@@ -9,8 +9,8 @@ export class MoviesService {
     return this.movies;
   }
 
-  getMovieById(id: string): Movie {
-    const foundMovie = this.movies.find((movie) => movie.id === +id); // +id === parseInt(id)
+  getMovieById(id: number): Movie {
+    const foundMovie = this.movies.find((movie) => movie.id === id);
 
     if (!foundMovie) {
       throw new NotFoundException(`Movie with ID ${id} not Found!`);
@@ -26,12 +26,12 @@ export class MoviesService {
     });
   }
 
-  deleteMovie(id: string) {
+  deleteMovie(id: number) {
     this.getMovieById(id);
     this.movies = this.movies.filter((movie) => movie.id !== +id);
   }
 
-  updateMovie(id: string, updateData) {
+  updateMovie(id: number, updateData) {
     const movie = this.getMovieById(id);
     this.deleteMovie(id);
     this.movies.push({ ...movie, ...updateData });
